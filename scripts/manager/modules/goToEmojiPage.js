@@ -4,7 +4,6 @@ const isEmail = require("../utilities/isEmail");
 const isInputs = require("../utilities/isInputs");
 
 const goToEmojiPage = async (page, inputs) => {
-
   // ログイン画面に遷移する（チームのカスタム絵文字管理画面へのリダイレクトパラメータ付き）
   await page.goto(
     `https://${inputs.workspace}.slack.com/?redir=%2Fcustomize%2Femoji#/`,

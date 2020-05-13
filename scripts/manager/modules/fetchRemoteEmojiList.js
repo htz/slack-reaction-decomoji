@@ -20,14 +20,13 @@
 */
 
 const fetchRemoteEmojiList = async (page, inputs) => {
-
   const { workspace } = inputs;
 
-  inputs.debug && inputs.fatlog &&
-    console.log('\nStart to fetch remote emoji list...');
+  inputs.debug &&
+    inputs.fatlog &&
+    console.log("\nStart to fetch remote emoji list...");
 
-  const remoteEmojiList = await page.evaluate( async (workspace) => {
-
+  const remoteEmojiList = await page.evaluate(async (workspace) => {
     /** @type {EmojiAdminList} */
     let emojiAdminList = [];
     const fetchEmojiAdminList = async (nextPage) => {
@@ -64,11 +63,11 @@ const fetchRemoteEmojiList = async (page, inputs) => {
     // 絵文字を全件取得する
     await fetchEmojiAdminList();
     return emojiAdminList;
-
   }, workspace);
 
-  inputs.debug && inputs.fatlog &&
-    console.log('Complete to fetch remote emoji list!\n');
+  inputs.debug &&
+    inputs.fatlog &&
+    console.log("Complete to fetch remote emoji list!\n");
 
   return remoteEmojiList;
 };
