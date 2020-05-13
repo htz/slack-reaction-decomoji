@@ -13,7 +13,6 @@ const getLocalDecomojiList = (categories) => {
         return {
           path,
           name,
-          category,
         };
       });
     })

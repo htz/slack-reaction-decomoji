@@ -18,12 +18,12 @@ const importer = async (inputs) => {
     // カスタム絵文字管理画面へ遷移する
     inputs = await goToEmojiPage(page, inputs);
 
+    console.log("Success to login.\nChecking data...\n");
     const uploadableDecomojiList = await getUploadableDecomojiList(
       page,
       inputs
     );
     const uploadableDecomojiLength = uploadableDecomojiList.length;
-    let currentCategory = "";
     let i = 0;
     let ratelimited = false;
 
@@ -37,17 +37,8 @@ const importer = async (inputs) => {
     }
 
     while (i < uploadableDecomojiLength) {
-      const { category, name, path } = uploadableDecomojiList[i];
+      const { name, path } = uploadableDecomojiList[i];
       const currentIdx = i + 1;
-
-      if (currentCategory === "" && currentCategory !== category) {
-        console.log(`\n[${category}] category start!`);
-        currentCategory = category;
-      }
-
-      console.log(
-        `${currentIdx}/${uploadableDecomojiLength}: importing ${name}...`
-      );
 
       const result = await postEmojiAdd(page, inputs.workspace, name, path);
 
