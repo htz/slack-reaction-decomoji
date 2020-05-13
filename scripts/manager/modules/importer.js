@@ -76,6 +76,7 @@ const importer = async (inputs) => {
       await _import(inputs);
     }
 
+    console.log("completed!");
     return;
   };
 
