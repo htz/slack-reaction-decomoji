@@ -20,6 +20,7 @@
 */
 
 const fetchRemoteEmojiList = async (page, inputs) => {
+  inputs.debug && console.time("[fetch remote emoji list time]");
   const { workspace } = inputs;
 
   inputs.debug &&
@@ -69,6 +70,7 @@ const fetchRemoteEmojiList = async (page, inputs) => {
     inputs.fatlog &&
     console.log("Complete to fetch remote emoji list!\n");
 
+  inputs.debug && console.timeEnd("[fetch remote emoji list time]");
   return remoteEmojiList;
 };
 
