@@ -5,7 +5,7 @@ const getRemovableDecomojiList = require("./getRemovableDecomojiList");
 const postEmojiRemove = require("./postEmojiRemove");
 
 const remover = async (inputs) => {
-  const _import = async (inputs) => {
+  const _remove = async (inputs) => {
     // puppeteer でブラウザを起動する
     const browser = await puppeteer.launch({ devtools: inputs.debug });
     // ページを追加する
@@ -70,14 +70,14 @@ const remover = async (inputs) => {
 
     // ratelimited でループを抜けていたらもう一度ログイン
     if (ratelimited) {
-      await _import(inputs);
+      await _remove(inputs);
     }
 
     return;
   };
 
   // 再帰処理をスタートする
-  await _import(inputs);
+  await _remove(inputs);
 };
 
 module.exports = remover;
