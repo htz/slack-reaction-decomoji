@@ -4,8 +4,8 @@ const goToEmojiPage = require("./goToEmojiPage");
 const getUploadableDecomojiList = require("./getUploadableDecomojiList");
 const postEmojiAdd = require("./postEmojiAdd");
 
-const importer = async (inputs) => {
-  const _import = async (inputs) => {
+const uploader = async (inputs) => {
+  const _upload = async (inputs) => {
     // puppeteer でブラウザを起動する
     const browser = await puppeteer.launch({ devtools: inputs.debug });
     // ページを追加する
@@ -29,7 +29,7 @@ const importer = async (inputs) => {
 
     // アップロード可能なものがない場合は終わり
     if (uploadableDecomojiLength === 0) {
-      console.log("All decomoji has already been imported!");
+      console.log("All decomoji has already been uploaded!");
       if (!inputs.debug) {
         await browser.close();
       }
@@ -44,7 +44,7 @@ const importer = async (inputs) => {
 
       console.log(
         `${currentIdx}/${uploadableDecomojiLength}: ${
-          result.ok ? "imported" : result.error
+          result.ok ? "uploaded" : result.error
         } ${name}.`
       );
 
@@ -69,17 +69,17 @@ const importer = async (inputs) => {
 
     // ratelimited でループを抜けていたらもう一度ログイン
     if (ratelimited) {
-      await _import(inputs);
+      await _upload(inputs);
     }
 
     console.log("completed!");
     return;
   };
 
-  inputs.debug && console.time("[import time]");
+  inputs.debug && console.time("[upload time]");
   // 再帰処理をスタートする
-  await _import(inputs);
-  inputs.debug && console.timeEnd("[import time]");
+  await _upload(inputs);
+  inputs.debug && console.timeEnd("[upload time]");
 };
 
-module.exports = importer;
+module.exports = uploader;
